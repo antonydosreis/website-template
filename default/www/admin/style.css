@@ -1,0 +1,205 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, b, i, ol, ul,
+li, fieldset, form, label, legend, table, tr, th, td, footer, header, nav, input{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	line-height: 1;
+	background-image: url(tiny_grid.png);
+	font-family: 'Poppins', sans-serif;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+input{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-border-radius: 0; 
+    border-radius: 0;
+}
+b{
+	font-weight: bold;
+}
+/* GERAL */
+.clear{
+	clear: both;
+}
+.bloco{
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 10px;
+	margin: 0 auto;
+}
+/* PAINEL DE CONTROLE */
+.aviso{
+	background-color: red;
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+	/* LOGIN */
+	.login img{
+		width: 250px;
+		margin: 20px 0;
+		margin-left: calc(50% - 125px);
+	}
+	.login form{
+		background-color: white;
+		width: 100%;
+		max-width: 400px;
+		margin: 0 auto;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		padding: 20px;
+	}
+		.login h1{
+			text-align: center;
+			color: rgb(0,153,226);
+			font-size: 32px;
+			margin-bottom: 20px;
+		}
+		.login p{
+			margin-top: 10px;
+			color: grey;
+			font-size: 14px;
+		}
+		.login input[type=text],.login input[type=password],.login input[type=submit]{
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			width: 100%;
+			padding: 10px;
+		}
+		.login input[type=submit]{
+			margin-top: 20px;
+		}
+	/* PAINEL */
+	header{
+		background-color: rgb(41,41,41);
+		padding: 20px 0;
+	}
+		header img{
+			height: 100px;
+			float: left;
+		}
+		header a{
+			line-height: 50px;
+			color: white;
+			text-decoration: none;
+			float: right;
+		}
+	nav{
+		background-color: rgb(56,56,56);
+		padding: 10px 0;
+	}
+		nav a, nav span{
+			padding: 0 10px;
+			color: #ccc;
+			text-decoration: none;
+		}
+			.dropdown {
+				position: relative;
+				display: inline-block;
+			}
+
+			.dropdown-content {
+				display: none;
+				position: absolute;
+				background-color: white;
+				width: 300px;
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				padding: 10px;
+				z-index: 1;
+			}
+			.dropdown-content a{
+				line-height: 30px;
+			}
+			.dropdown-content a:hover{
+				color: black;
+			}
+
+			.dropdown:hover .dropdown-content {
+				display: block;
+			}
+	.formulario{
+		margin-top: 10px;
+		background-color: white;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		padding: 10px;
+	}
+		.formulario h2{
+			margin: -11px -11px 10px -11px;
+			background-color: #eee;
+			border: 1px solid #ccc;
+			border-radius: 5px 5px 0 0;
+			padding: 5px 10px;
+		}
+		.formulario input{
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			padding: 3px 10px;
+		}
+		.formulario textarea{
+			display: none;
+		}
+			.formulario input[type=file]{
+				display: none;
+			}
+		.formulario p{
+			text-transform: uppercase;
+			font-size: 11px;
+			margin-top: 10px;
+		}
+		.formulario button{
+			background-color: rgb(0,153,226);
+			border: 1px solid rgb(0,109,168);
+			border-radius: 5px;
+			color: white;
+			padding: 5px 10px;
+		}
+		.formulario img{
+			float: left;
+			max-width: 100px;
+			max-height: 100px;
+		}
+		.formulario hr{
+			border: none;
+			border-top: 1px solid #ccc;
+			margin-left: -10px;
+			width: calc(100% + 20px);
+		}
+		.formulario .arrow{
+			float: left;
+			height: 100px;
+			width: 20px;
+			float: left;
+			text-align: center;
+		}
+		.formulario .arrow p{
+			line-height: 75px;
+		}
+		.teste{
+			display: block;
+			float: left;
+			width: 100px;
+			height: 100px;
+			background-image: url(preview.png);
+		}
+	.foto{
+		width: calc(25% - 20px);
+		height:200px;
+		float: left;
+		margin-left: 10px;
+	}
