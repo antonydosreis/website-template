@@ -5,73 +5,63 @@
 		header('Location: login.php');
 		die();
 	}
-	if(isset($_GET['sair'])){
+	if(isset($_GET['get_out'])){
 		session_destroy();
 		header('Location: login.php');
 		die();
 	}
-	$aba_atual = "";
-	if(isset($_GET['aba'])){$aba_atual = $_GET['aba'];}
+	$current_tab = "";
+	if(isset($_GET['tab'])){$current_tab = $_GET['tab'];}
 
 	$sqlInfo = $pdo->query("SELECT * FROM info");
 	$infoInfo = $sqlInfo->fetchAll();
 
-$filename = "contador.txt";
+$filename = "access_counter.txt";
 $fp = fopen($filename, 'r');
 $count = fread($fp, filesize($filename));
 fclose($fp);
 
-	if(isset($_POST['salvar'])){
+	if(isset($_POST['save'])){
 		foreach ($infoInfo as $key => $valueInfo) {
-            $campo = str_replace(' ', '_', $valueInfo['campo']);
+            $field = str_replace(' ', '_', $valueInfo['field']);
 
-            if(isset($_POST[$campo])){
-            	$valor = preg_replace( "/\n/", "<br>", $_POST[$campo]);
+            if(isset($_POST[$field])){
+            	$value = preg_replace( "/\n/", "<br>", $_POST[$field]);
             	
-				$sql = $pdo->prepare("UPDATE info SET valor = ? WHERE campo = ?");
-				$sql->execute(array($valor,$campo));
+				$sql = $pdo->prepare("UPDATE info SET value = ? WHERE field = ?");
+				$sql->execute(array($value,$field));
             }
-            if(isset($_FILES[$campo]) and $_FILES[$campo]['name']!=""){
-            	$valor = $campo.".".pathinfo($_FILES[$campo]['name'])['extension'];
-				move_uploaded_file($_FILES[$campo]["tmp_name"],"../templates/images/".$valor);
-				$sql = $pdo->prepare("UPDATE info SET valor = ? WHERE campo = ?");
-				$sql->execute(array($valor,$campo));
+            if(isset($_FILES[$field]) and $_FILES[$field]['name']!=""){
+            	$value = $field.".".pathinfo($_FILES[$field]['name'])['extension'];
+				move_uploaded_file($_FILES[$field]["tmp_name"],"../templates/images/".$value);
+				$sql = $pdo->prepare("UPDATE info SET value = ? WHERE field = ?");
+				$sql->execute(array($value,$field));
             }
-            header("Location:index.php?aba=$aba_atual");
+            header("Location:index.php?tab=$current_tab");
         }
 	}
-	if(isset($_POST['cadastrar_foto'])){
-		if(isset($_FILES['imagem']) and $_FILES['imagem']['name']!=""){
-			$novo_nome_imagem = "imagem-".date('dmYHis').".".pathinfo($_FILES["imagem"]['name'])['extension'];
-			$imagem = $_FILES['imagem'];
-			move_uploaded_file($imagem["tmp_name"],"../templates/images/".$novo_nome_imagem);
-			$sql = $pdo->prepare("INSERT INTO info (campo, tipo, aba, valor) VALUES (?,?,?,?)");
-			$sql->execute([$novo_nome_imagem,'geral','Fotos',$novo_nome_imagem]);
-			header("Location:index.php?aba=$aba_atual");
+	if(isset($_POST['register_photo'])){
+		if(isset($_FILES['image']) and $_FILES['image']['name']!=""){
+			$new_name_image = "image-".date('dmYHis').".".pathinfo($_FILES["image"]['name'])['extension'];
+			$image = $_FILES['image'];
+			move_uploaded_file($image["tmp_name"],"../templates/images/".$new_name_image);
+			$sql = $pdo->prepare("INSERT INTO info (field, type, tab, value) VALUES (?,?,?,?)");
+			$sql->execute([$new_name_image,'geral','Fotos',$new_name_image]);
+			header("Location:index.php?tab=$current_tab");
 		} 
 	}
-	if(isset($_POST['excluir_foto'])){
+	if(isset($_POST['delete_photo'])){
 		foreach ($infoInfo as $key => $valueInfo3) {
-			$campo = $valueInfo3['id'];
-			if(isset($_POST['id'.str_replace(' ', '_', $campo)])){
-				$id = $_POST['id'.str_replace(' ', '_', $campo)];
+			$field = $valueInfo3['id'];
+			if(isset($_POST['id'.str_replace(' ', '_', $field)])){
+				$id = $_POST['id'.str_replace(' ', '_', $field)];
 
 				$sql = $pdo->prepare("DELETE FROM info WHERE id = ?");
 				$sql->execute(array($id));
-				header("Location:index.php?aba=$aba_atual"); 
+				header("Location:index.php?tab=$current_tab"); 
 			}
 		}
 	}
-
-
-	$aux_abas = "";
-    foreach ($infoInfo as $key => $valueInfoA) {
-        if(!preg_match("/{$valueInfoA["aba"]}/", $aux_abas)){
-            $aux_abas .= $valueInfoA["aba"].",";
-        }
-    }
-    $aux_abas = substr($aux_abas, 0, -1);
-    $abas = explode(',', $aux_abas);
 ?>
 <!DOCTYPE html>
 <html>
@@ -87,79 +77,79 @@ fclose($fp);
 	</head>
 	<body>
 		<header>
-			<div class="bloco">
+			<div class="content">
 				<img src="../templates/images/logo2.png" style="height: 50px;">
 				<a href="?sair"><i class="fas fa-user-circle"></i> Sair</a>
 				<div class="clear"></div>
 			</div>
 		</header>
 		<nav>
-			<div class="bloco">
-				<a href="?aba=Página inicial">Página inicial</a>
+			<div class="content">
+				<a href="?tab=Página inicial">Página inicial</a>
 				<div class="dropdown">
 					<span>Avançado</span>
 					<div class="dropdown-content">
-						<a href="?aba=SEO">SEO</a><br>
-						<a href="?aba=Controle de acessos">Controle de acessos</a><br>
+						<a href="?tab=SEO">SEO</a><br>
+						<a href="?tab=Controle de acessos">Controle de acessos</a><br>
 					</div>
 				</div>
 			</div>
 		</nav>
-		<div class="bloco">
-			<?php if ($aba_atual == "Controle de acessos") { ?>
-				<br><br><p>Total de visitar ao site: <?= $count ?></p>
-			<?php }else if ($aba_atual == "Cadastrar fotos") { ?>
-				<form method="post" class="formulario" enctype="multipart/form-data">
+		<div class="content">
+			<?php if ($current_tab == "Controle de acessos") { ?>
+				<br><br><p>Total de visitas ao site: <?= $count ?></p>
+			<?php }else if ($current_tab == "Cadastrar fotos") { ?>
+				<form method="post" class="form" enctype="multipart/form-data">
 					<h2>Cadastrar fotos</h2>
-					<p>Imagem</p>
-					<img src="preview.png" id="image_preview" alt="Nova imagem" title="Nova imagem" onclick="$('#image_file').trigger('click');">
-					<input type="file" name="imagem" id="image_file" onchange="document.getElementById('image_preview').src = window.URL.createObjectURL(this.files[0])">
+					<p>image</p>
+					<img src="preview.png" id="image_preview" alt="Nova image" title="Nova image" onclick="$('#image_file').trigger('click');">
+					<input type="file" name="image" id="image_file" onchange="document.getElementById('image_preview').src = window.URL.createObjectURL(this.files[0])">
 					<div class="clear"></div>
-					<button type="submit" name="cadastrar_foto"><i class="fas fa-check"></i> Cadastrar</button>
+					<button type="submit" name="register_photo"><i class="fas fa-check"></i> Cadastrar</button>
 				</form>
-			<?php }else if ($aba_atual == "Fotos") { ?>
+			<?php }else if ($current_tab == "Fotos") { ?>
 				<?php foreach ($infoInfo as $key => $valueInfo) { ?>
-					<?php if($valueInfo['aba'] == "Fotos"){ ?>
-						<form method="post" class="formulario foto" enctype="multipart/form-data">
-							<h2><?= $valueInfo['campo'] ?></h2>
-							<p>Imagem</p>
-							<img src="../templates/images/<?= $valueInfo['valor'] ?>" alt="Imagem atual" title="Imagem atual">
+					<?php if($valueInfo['tab'] == "Fotos"){ ?>
+						<form method="post" class="form photo" enctype="multipart/form-data">
+							<h2><?= $valueInfo['field'] ?></h2>
+							<p>image</p>
+							<img src="../templates/images/<?= $valueInfo['value'] ?>" alt="image atual" title="image atual">
 							<div class="clear"></div>
 							<input type="hidden" name="id<?= str_replace(' ', '_', $valueInfo['id']) ?>" value="<?= $valueInfo['id'] ?>">
-							<button type="submit" name="excluir_foto"><i class="fas fa-times"></i> excluir</button>
+							<button type="submit" name="delete_photo"><i class="fas fa-times"></i> excluir</button>
 						</form>
 					<?php } ?>
 				<?php } ?>
 			<?php }else{ ?>
-				<form method="post" class="formulario" enctype="multipart/form-data" runat="server">
-					<h2><?= $aba_atual ?></h2>
+				<form method="post" class="form" enctype="multipart/form-data" runat="server">
+					<h2><?= $current_tab ?></h2>
 					<?php foreach ($infoInfo as $key => $valueInfo) {
-						if($valueInfo['aba'] == $aba_atual){
-							if($valueInfo['tipo'] == "texto"){ ?>
-								<p><?= str_replace('_', ' ', $valueInfo['campo']) ?></p>
-								<input type="text" name="<?= $valueInfo['campo'] ?>" value="<?= $valueInfo['valor'] ?>">
+						if($valueInfo['tab'] == $current_tab){
+							if($valueInfo['type'] == "texto"){ ?>
+								<p><?= str_replace('_', ' ', $valueInfo['field']) ?></p>
+								<input type="text" name="<?= $valueInfo['field'] ?>" value="<?= $valueInfo['value'] ?>">
 								<hr>
 							<?php }
-							if($valueInfo['tipo'] == "texto_longo"){ ?>
-								<p><?= str_replace('_', ' ', $valueInfo['campo']) ?></p>
-								<textarea name="<?= str_replace(' ', '_', $valueInfo['campo']) ?>"><?= preg_replace("/<br>/", "\n", $valueInfo['valor']) ?></textarea>
+							if($valueInfo['type'] == "texto_longo"){ ?>
+								<p><?= str_replace('_', ' ', $valueInfo['field']) ?></p>
+								<textarea name="<?= str_replace(' ', '_', $valueInfo['field']) ?>"><?= preg_replace("/<br>/", "\n", $valueInfo['value']) ?></textarea>
 								<script>
-									CKEDITOR.replace( '<?= str_replace(' ', '_', $valueInfo['campo']) ?>' );
+									CKEDITOR.replace( '<?= str_replace(' ', '_', $valueInfo['field']) ?>' );
 								</script>
 								<hr>
 							<?php }
-							if($valueInfo['tipo'] == "imagem"){ ?>
-								<p><?= str_replace('_', ' ', $valueInfo['campo']) ?></p>
-								<img src="../templates/images/<?= $valueInfo['valor'] ?>" alt="Imagem atual" title="Imagem atual">
+							if($valueInfo['type'] == "imagem"){ ?>
+								<p><?= str_replace('_', ' ', $valueInfo['field']) ?></p>
+								<img src="../templates/images/<?= $valueInfo['value'] ?>" alt="image atual" title="image atual">
 								<div class="arrow"><p><i class="fas fa-arrow-right"></i></p></div>
-								<img src="preview.png" id="image_preview_<?= $valueInfo[1] ?>" alt="Nova imagem" title="Nova imagem" onclick="$('#image_file_<?= str_replace(' ', '_', $valueInfo[1]) ?>').trigger('click');">
-								<input type="file" name="<?= str_replace(' ', '_', $valueInfo['campo']) ?>" id="image_file_<?= str_replace(' ', '_', $valueInfo[1]) ?>" onchange="document.getElementById('image_preview_<?= $valueInfo[1] ?>').src = window.URL.createObjectURL(this.files[0])">
+								<img src="preview.png" id="image_preview_<?= $valueInfo[1] ?>" alt="Nova image" title="Nova image" onclick="$('#image_file_<?= str_replace(' ', '_', $valueInfo[1]) ?>').trigger('click');">
+								<input type="file" name="<?= str_replace(' ', '_', $valueInfo['field']) ?>" id="image_file_<?= str_replace(' ', '_', $valueInfo[1]) ?>" onchange="document.getElementById('image_preview_<?= $valueInfo[1] ?>').src = window.URL.createObjectURL(this.files[0])">
 								<div class="clear"></div>
 								<hr>
 							<?php }
 						} 
 					} ?>
-					<button type="submit" name="salvar"><i class="fas fa-check"></i> Salvar</button>
+					<button type="submit" name="save"><i class="fas fa-check"></i> Salvar</button>
 				</form>
 			<?php } ?>
 		</div>

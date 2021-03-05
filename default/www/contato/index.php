@@ -9,16 +9,16 @@
 <html lang="pt-br">
 <head>
 	<?php include("include/head.inc.php") ?>
-	<!--título--><title>TÍTULO</title>
-	<meta property="og:title" content="TÍTULO">
-	<meta name="twitter:title" content="TÍTULO">
-	<!--descrição--><meta name="description" content="DESCRIÇÃO">
-	<meta property="og:site_name" content="DESCRIÇÃO">
-	<meta property="og:description" content="DESCRIÇÃO">
-	<meta name="twitter:description" content="DESCRIÇÃO">
-	<!--link--><link rel="canonical" href="https://LINK.com.br">
+	<!--TITLE--><title>TITLE</title>
+	<meta property="og:title" content="TITLE">
+	<meta name="twitter:title" content="TITLE">
+	<!--DESCRIPTION--><meta name="description" content="DESCRIPTION">
+	<meta property="og:site_name" content="DESCRIPTION">
+	<meta property="og:description" content="DESCRIPTION">
+	<meta name="twitter:description" content="DESCRIPTION">
+	<!--LINK--><link rel="canonical" href="https://LINK.com.br">
 	<meta property="og:url" content="https://LINK.com.br">
-	<!--imagem--><meta property="og:image" content="https://site.com/templates/images/BANNER.jpg">
+	<!--IMAGE--><meta property="og:image" content="https://site.com/templates/images/BANNER.jpg">
 	<meta name="twitter:image" content="https://site.com/templates/images/BANNER.jpg">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta property="og:image:type" content="image/jpg">

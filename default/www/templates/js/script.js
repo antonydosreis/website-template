@@ -1,15 +1,21 @@
-// ENCOLHER MENUS
+// GO TO LINK WITH SPACE AND ANIMATION
+$(document).on('click', 'a[href^="#"]', function (event) {
+	event.preventDefault();
+
+	$('html, body').animate({
+		scrollTop: $($.attr(this, 'href')).offset().top - 50
+	}, 500);
+})
+// SHRINK MENUS
 window.onscroll = function() {scrollFunction()};
 function scrollFunction(){
 	if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
-		document.getElementsByClassName("menu_principal")[0].classList.add("encolhido");
-		document.getElementsByClassName("menu_whatsapp")[0].classList.add("encolhido");
+		document.getElementsByClassName("main_menu")[0].classList.add("shrunken");
 	}else{
-		document.getElementsByClassName("menu_principal")[0].classList.remove("encolhido");
-		document.getElementsByClassName("menu_whatsapp")[0].classList.remove("encolhido");
+		document.getElementsByClassName("main_menu")[0].classList.remove("shrunken");
 	}
 }
-// ABRIR E FECHAR DIVS
+// OPEN AND CLOSE DIVS
 	function open_div(id){
 		document.getElementById(id).style.display = "block";
 		document.getElementById(id).classList.add("show");

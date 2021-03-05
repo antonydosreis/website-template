@@ -2,15 +2,15 @@
 	session_start();
 	include("../include/db_connect.inc.php");
 	if(isset($_POST['cadastrar'])){
-		$usuario = $_POST['usuario'];
-		$senha = $_POST['senha'];
-		$criptografada = password_hash($senha, PASSWORD_DEFAULT);
-		if($usuario == '' || $senha == ''){
-			echo '<p class="aviso">Preencha todos os campos!</p>';
+		$user = $_POST['user'];
+		$password = $_POST['password'];
+		$encrypted = password_hash($password, PASSWORD_DEFAULT);
+		if($user == '' || $password == ''){
+			echo '<p class="warning">Preencha todos os campos!</p>';
 		}else{
-			$sql = $pdo->prepare("INSERT INTO usuarios VALUES (?,?,?)");
-			$sql->execute([null,$usuario, $criptografada]);
-			echo '<p class="aviso" style="background-color: green;">Usuário cadastrado con sucesso!</p>';
+			$sql = $pdo->prepare("INSERT INTO users VALUES (?,?,?)");
+			$sql->execute([null,$user, $encrypted]);
+			echo '<p class="warning" style="background-color: green;">Usuário cadastrado con sucesso!</p>';
 		}
 	}
 ?>
@@ -30,9 +30,9 @@
 			<form method="post" class="login">
 				<h1>Cadastrar usuário</h1>
 				<p>Usuário</p>
-				<input type="text" name="usuario" placeholder="Usuário" autofocus>
+				<input type="text" name="user" placeholder="Usuário" autofocus>
 				<p>Senha</p>
-				<input type="password" name="senha" placeholder="Senha">
+				<input type="password" name="password" placeholder="Senha">
 				<input type="submit" name="cadastrar" value="Cadastrar">
 			</form>
 		</div>

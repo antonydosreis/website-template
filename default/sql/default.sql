@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `ateliefaber`
+-- Banco de dados: `default`
 --
 
 -- --------------------------------------------------------
@@ -29,22 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `info` (
   `id` int(11) NOT NULL,
-  `campo` varchar(255) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
-  `aba` varchar(50) NOT NULL,
-  `valor` longtext NOT NULL
+  `field` varchar(255) NOT NULL,
+  `tyope` varchar(20) NOT NULL,
+  `tab` varchar(50) NOT NULL,
+  `value` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura da tabela `users`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `usuario` varchar(255) NOT NULL,
-  `senha` varchar(255) NOT NULL
+  `user` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -58,9 +58,9 @@ ALTER TABLE `info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `usuarios`
+-- Índices para tabela `users`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -74,9 +74,9 @@ ALTER TABLE `info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `usuarios`
+-- AUTO_INCREMENT de tabela `users`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

@@ -1,14 +1,14 @@
 <?php
-	$email_empresa = "email@site.com";
+	$email_company = "email@site.com";
 
-	$nome = $_POST['nome'];
+	$name = $_POST['nome'];
 	$email = $_POST['email'];
-	$telefone = $_POST['telefone'];
-	$mensagem = $_POST['mensagem'];
-	$data_envio = date('d/m/Y');
-	$hora_envio = date('H:i:s');
+	$phone = $_POST['telefone'];
+	$message = $_POST['mensagem'];
+	$send_date = date('d/m/Y');
+	$shipping_time = date('H:i:s');
 
-	$arquivo = "
+	$file = "
 	<style type='text/css'>
 		body {
 			margin:10px;
@@ -16,24 +16,24 @@
 		}
 	</style>
 	<html>
-		<p><b>Nome:</b><br>$nome</p>
+		<p><b>name:</b><br>$name</p>
 		<p><b>Email:</b><br>$email</p>
-		<p><b>Telefone:</b><br>$telefone</p>
-		<p><b>Mensagem:</b><br>$mensagem</p>
-		<p>Este email foi enviado em <b>$data_envio</b> às <b>$hora_envio</b></p>
+		<p><b>Telefone:</b><br>$phone</p>
+		<p><b>Mensagem:</b><br>$message</p>
+		<p>Este email foi enviado em <b>$send_date</b> às <b>$shipping_time</b></p>
 	</html>
 	";
-	$destino = $email_empresa;
-	$assunto = "Contato pelo Site - $nome";
+	$destino = $email_company;
+	$assunto = "Contato pelo Site - $name";
 
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'From: '.$nome.'<'.$email.'>';
+	$headers .= 'From: '.$name.'<'.$email.'>';
 
-	$enviar_email = mail($destino, $assunto, $arquivo, $headers);
+	$enviar_email = mail($destino, $assunto, $file, $headers);
 	if($enviar_email){
 		echo " <meta http-equiv='refresh' content='3;URL=index.php'>";
-		echo "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
+		echo "E-MAIL ENVIADO COM SUCESSO!";
 	} else {
 		echo "erro ao enviar o e-mail";
 	}

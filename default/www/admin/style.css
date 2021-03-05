@@ -29,18 +29,22 @@ input{
 b{
 	font-weight: bold;
 }
-/* GERAL */
+/* GENERAL */
 .clear{
 	clear: both;
 }
-.bloco{
+.content{
 	width: 100%;
 	max-width: 1200px;
 	padding: 0 10px;
 	margin: 0 auto;
 }
-/* PAINEL DE CONTROLE */
-.aviso{
+/* CONTROL PANEL */
+.warning{
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: calc(100% - 20px);
 	background-color: red;
 	color: white;
 	padding: 10px;
@@ -82,7 +86,7 @@ b{
 		.login input[type=submit]{
 			margin-top: 20px;
 		}
-	/* PAINEL */
+	/* PANEL */
 	header{
 		background-color: rgb(41,41,41);
 		padding: 20px 0;
@@ -110,7 +114,6 @@ b{
 				position: relative;
 				display: inline-block;
 			}
-
 			.dropdown-content {
 				display: none;
 				position: absolute;
@@ -126,68 +129,67 @@ b{
 			.dropdown-content a:hover{
 				color: black;
 			}
-
 			.dropdown:hover .dropdown-content {
 				display: block;
 			}
-	.formulario{
+	.form{
 		margin-top: 10px;
 		background-color: white;
 		border: 1px solid #ccc;
 		border-radius: 5px;
 		padding: 10px;
 	}
-		.formulario h2{
+		.form h2{
 			margin: -11px -11px 10px -11px;
 			background-color: #eee;
 			border: 1px solid #ccc;
 			border-radius: 5px 5px 0 0;
 			padding: 5px 10px;
 		}
-		.formulario input{
+		.form input{
 			width: 100%;
 			border: 1px solid #ccc;
 			border-radius: 5px;
 			font-size: 16px;
 			padding: 3px 10px;
 		}
-		.formulario textarea{
+		.form textarea{
 			display: none;
 		}
-			.formulario input[type=file]{
+			.form input[type=file]{
 				display: none;
 			}
-		.formulario p{
+		.form p{
 			text-transform: uppercase;
 			font-size: 11px;
 			margin-top: 10px;
 		}
-		.formulario button{
+		.form button{
 			background-color: rgb(0,153,226);
 			border: 1px solid rgb(0,109,168);
 			border-radius: 5px;
 			color: white;
 			padding: 5px 10px;
 		}
-		.formulario img{
+		.form img{
 			float: left;
 			max-width: 100px;
 			max-height: 100px;
 		}
-		.formulario hr{
+		.form hr{
 			border: none;
 			border-top: 1px solid #ccc;
 			margin-left: -10px;
 			width: calc(100% + 20px);
 		}
-		.formulario .arrow{
+		.form .arrow{
 			float: left;
 			height: 100px;
 			width: 20px;
 			float: left;
 			text-align: center;
 		}
-		.formulario .arrow p{
+		.form .arrow p{
 			line-height: 75px;
 		}
 		.teste{
@@ -197,7 +199,7 @@ b{
 			height: 100px;
 			background-image: url(preview.png);
 		}
-	.foto{
+	.photo{
 		width: calc(25% - 20px);
 		height:200px;
 		float: left;

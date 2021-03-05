@@ -9,17 +9,17 @@
 	{
 		"@context": "http://schema.org",
 		"@type": "LocalBusiness",
-		"name": "NOME DO SITE",
+		"name": "SITE NAME",
 		"image": "https://site.com/templates/images/BANNER.jpg",
 		"logo": "https://site.com/templates/images/LOGO.png",
-		"telephone": "TELEFONE",
+		"telephone": "PHONE",
 		"email": "EMAIL",
 		"address": {
 			"@type": "PostalAddress",
-			"streetAddress": "RUA, nº 1",
-			"addressLocality": "BAIRRO - CIDADE",
+			"streetAddress": "ROAD, nº 1",
+			"addressLocality": "DISTRICT - CITY",
 			"addressRegion": "RS",
-			"addressCountry": "Brasil",
+			"addressCountry": "COUNTRY",
 			"postalCode": "CEPCEP-CEP"
 		},
 	"url": "https://SITE.com",

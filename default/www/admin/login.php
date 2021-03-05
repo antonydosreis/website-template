@@ -5,24 +5,24 @@
 	$infoInfo = $sqlInfo->fetchAll();
 
 	if(isset($_POST['login'])){
-		$usuario = $_POST['usuario'];
-		$senha = $_POST['senha'];
-		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ?");
-		$sql->execute([$usuario]);
+		$user = $_POST['user'];
+		$password = $_POST['password'];
+		$sql = $pdo->prepare("SELECT * FROM users WHERE user = ?");
+		$sql->execute([$user]);
 
 		if($sql->rowCount() == 1){
 			$info = $sql->fetch();
-			if(password_verify($senha, $info['senha'])){
+			if(password_verify($password, $info['password'])){
 				$_SESSION['login'] = true;
 				$_SESSION['id'] = $info['id'];
-				$_SESSION['usuario'] = $info['usuario'];
+				$_SESSION['user'] = $info['user'];
 				header("Location: index.php");
 				die();
 			}else{
-				echo '<p class="aviso">Usuário ou senha incorretos!</p>';
+				echo '<p class="warning">Usuário ou password incorretos!</p>';
 			}
 		}else{
-			echo '<p class="aviso">Usuário ou senha incorretos!</p>';
+			echo '<p class="warning">Usuário ou password incorretos!</p>';
 		}
 	}
 ?>
@@ -42,9 +42,9 @@
 			<form method="post" class="login">
 				<h1>Entrar</h1>
 				<p>Usuário</p>
-				<input type="text" name="usuario" placeholder="Usuário" autofocus>
+				<input type="text" name="user" placeholder="Usuário" autofocus>
 				<p>Senha</p>
-				<input type="password" name="senha" placeholder="Senha">
+				<input type="password" name="password" placeholder="Senha">
 				<input type="submit" name="login" value="Entrar">
 			</form>
 		</div>
