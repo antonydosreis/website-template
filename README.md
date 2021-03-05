@@ -1,2 +1,9 @@
-# projeto modelo
-Um projeto modelo com toda a organização de pastas, os arquivos principais e com um painel de controle pronto para começar qualquer site
+# website template
+
+**A model project with**
+
+* Folder organization
+* Main files
+* Adapted to include header and footer
+* SCSS files
+* Control panel with simple login system
